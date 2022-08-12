@@ -8,6 +8,7 @@
     height: 45px;
     padding: 0px 10px;
     border: 2px solid #000;
+    border-radius : 10px
 }
 .flex{
     display :flex;
