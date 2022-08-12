@@ -1,17 +1,44 @@
 <!-- <router-outlet></router-outlet> -->
-<p>app component</p>
-<input [(ngModel)]="moviName" (ngModelChange)="searchMovi($event)" type="text">
+<!-- <p>app component</p> -->
+<!-- <input [(ngModel)]="moviName" (ngModelChange)="searchMovi($event)" type="text">
 <pre *ngIf="error"> {{errorMsg}} </pre>
 <pre *ngIf="!error">
-  <!-- <pre><code>{{pageNumber | json}}</code></pre> -->
+  <pre><code>{{pageNumber | json}}</code></pre>
   <button (click)="previousPage()" [disabled]="pageNumber <= 1">Previous</button>
   <button (click)="nextPage()">Next</button>
   <code>{{movies | json}}</code>
-  <ul *ngFor="let i of movies?.['Search']">
-    <li (click)="selectMovi(i)"> 
-      <p *ngIf="i?.['imdbID'] == selectedMobi?.['imdbID']"> Selected Movi</p>
-      {{i?.Title}} - {{i?.Year}}
-    </li>
-  </ul>
-  <code>{{movieDetails | json}}</code>
-</pre>
+</pre> -->
+
+<section>
+  <div class="container">
+    <div class="flex">
+      <div class="movie-panel">
+        <input [(ngModel)]="moviName" (ngModelChange)="searchMovi($event)" placeholder="Search movies" type="text">
+        <ul *ngFor="let i of movies?.['Search']">
+          <li (click)="selectMovi(i)">
+            {{i?.Title}}
+            <i *ngIf="i?.['imdbID'] == selectedMobi?.['imdbID']" class="fa fa-star-o" aria-hidden="true"></i>
+            <p> {{i?.Year}}</p>
+          </li>
+        </ul>
+        <button (click)="previousPage()" [disabled]="pageNumber <= 1">Previous</button>
+        <pre><code>{{pageNumber | json}}</code></pre>
+        <button (click)="nextPage()">Next</button>
+      </div>
+      <div *ngIf="movieDetails" class="movie-details" [ngClass]="movieDetails ? 'border-left' : 'no-border' ">
+        <!-- <code>{{movieDetails | json}}</code> -->
+        <div>
+          <h1>{{movieDetails?.Title}}</h1>
+          <p><b>Movie plot -</b> {{movieDetails?.Plot}}</p>
+          <p><b>Language :</b> {{movieDetails?.Language}}</p>
+          <p><b>Director :</b> {{movieDetails?.Director}}</p>
+          <p><b>Actors :</b> {{movieDetails?.Actors}}</p>
+          <p><b>Duration :</b>{{movieDetails?.Runtime}}</p>
+        </div>
+        <div>
+            <img [src]="movieDetails?.Poster" [alt]="movieDetails?.Title" srcset="">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

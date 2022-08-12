@@ -1,0 +1,40 @@
+.container{
+    width: 1170px;
+    margin: 0px auto;
+    max-width: 100%;
+}
+.flex{
+    display :flex;
+}
+.movie-panel{
+    flex: 0 0 30%;
+    padding-right: 30px;
+}
+.movie-panel ul{
+    padding: 0;
+    margin: 0;
+}
+.movie-panel ul li{
+    list-style: none;
+}
+.movie-panel ul li{
+    display: block;
+    padding: 10px;
+    border: 2px solid #000;
+    margin: 5px 0px;
+}
+.movie-details{
+    display:flex;
+    padding-left: 20px;
+    flex: 0 0 70%;
+    padding-top: 20px;
+}
+.movie-details div{
+    flex: 1;
+}
+.no-border{
+    border-left: none;
+}
+.border-left{
+    border-left: 2px solid #000;
+}
