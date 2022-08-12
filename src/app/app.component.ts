@@ -15,6 +15,7 @@ export class AppComponent {
   pageNumber :number = 1;
   movieDetails : any = null;
   selectedMobi : any = null;
+  totalPages : number = 0;
 
   constructor(private moviesService:MoviesService){}
   
@@ -30,9 +31,12 @@ export class AppComponent {
       if(res['Response'] == 'True'){
         this.error = false;
         this.movies = res;
+        this.totalPages = Math.ceil(Math.ceil(this.movies['totalResults'] / 10));
       } else {
         this.error = true;
         this.errorMsg = res['Error'];
+        this.totalPages = 0;
+        this.pageNumber = 1;
       }
     }, err => console.error(err) );
   }

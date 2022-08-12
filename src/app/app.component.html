@@ -14,16 +14,23 @@
     <div class="flex">
       <div class="movie-panel">
         <input [(ngModel)]="moviName" (ngModelChange)="searchMovi($event)" placeholder="Search movies" type="text">
-        <ul *ngFor="let i of movies?.['Search']">
-          <li (click)="selectMovi(i)">
-            {{i?.Title}}
-            <i *ngIf="i?.['imdbID'] == selectedMobi?.['imdbID']" class="fa fa-star-o" aria-hidden="true"></i>
-            <p> {{i?.Year}}</p>
-          </li>
-        </ul>
-        <button (click)="previousPage()" [disabled]="pageNumber <= 1">Previous</button>
-        <pre><code>{{pageNumber | json}}</code></pre>
-        <button (click)="nextPage()">Next</button>
+        <div *ngIf="error"> {{errorMsg}} </div>
+        <div *ngIf="!error"> 
+          <ul *ngFor="let i of movies?.['Search']">
+            <li (click)="selectMovi(i)">
+              {{i?.Title}}
+              <i *ngIf="i?.['imdbID'] == selectedMobi?.['imdbID']" class="fa fa-star-o" aria-hidden="true"></i>
+              <p> {{i?.Year}}</p>
+            </li>
+          </ul>
+          <div *ngIf="movies?.['Search']?.length">
+            <button (click)="previousPage()" [disabled]="pageNumber <= 1">Previous</button>
+            <p>Page {{pageNumber}}</p>
+            <p>{{movies?.['totalResults']}} results</p>       
+            <button (click)="nextPage()" [disabled]="totalPages == pageNumber">Next</button>
+          </div>
+        </div>
+
       </div>
       <div *ngIf="movieDetails" class="movie-details" [ngClass]="movieDetails ? 'border-left' : 'no-border' ">
         <!-- <code>{{movieDetails | json}}</code> -->
