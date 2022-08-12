@@ -8,7 +8,10 @@
   <button (click)="nextPage()">Next</button>
   <code>{{movies | json}}</code>
   <ul *ngFor="let i of movies?.['Search']">
-    <li (click)="selectMovi(i)"> {{i?.Title}} - {{i?.Year}}</li>
+    <li (click)="selectMovi(i)"> 
+      <p *ngIf="i?.['imdbID'] == selectedMobi?.['imdbID']"> Selected Movi</p>
+      {{i?.Title}} - {{i?.Year}}
+    </li>
   </ul>
-<code>{{movieDetails | json}}</code>
+  <code>{{movieDetails | json}}</code>
 </pre>

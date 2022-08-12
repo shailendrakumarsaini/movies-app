@@ -13,7 +13,8 @@ export class AppComponent {
   errorMsg : string = '';
   error : boolean = false;
   pageNumber :number = 1;
-  movieDetails : any;
+  movieDetails : any = null;
+  selectedMobi : any = null;
 
   constructor(private moviesService:MoviesService){}
   
@@ -37,20 +38,17 @@ export class AppComponent {
   }
 
   previousPage(){
-    // if(this.pageNumber > 1){
-      this.pageNumber = this.pageNumber - 1;
-      this.search(this.moviName, this.pageNumber);
-    // }
+    this.pageNumber = this.pageNumber - 1;
+    this.search(this.moviName, this.pageNumber);
   }
 
   nextPage(){
-    // if(this.pageNumber <= 1){
-      this.pageNumber = this.pageNumber + 1;
-      this.search(this.moviName, this.pageNumber);
-    // }
+    this.pageNumber = this.pageNumber + 1;
+    this.search(this.moviName, this.pageNumber);
   }
 
   selectMovi(movi){
+    this.selectedMobi = movi;
     this.moviesService.searchMoviesByImdbId(movi.imdbID).subscribe((res : any) => {
       console.log(res);
       this.movieDetails = res;
